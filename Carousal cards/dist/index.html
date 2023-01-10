@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - 3d carousel with CSS trig-functions</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="carousel3d">
+  <div class="items" style="--items-total: 5">
+    <div class="item" style="--item-index: 0">
+      <img src="https://picsum.photos/1920/1080?random=1" alt="">
+    </div>
+    <div class="item" style="--item-index: 1">
+      <img src="https://picsum.photos/1920/1080?random=2" alt="">
+    </div>
+    <div class="item" style="--item-index: 2">
+      <img src="https://picsum.photos/1920/1080?random=3" alt="">
+    </div>
+    <div class="item" style="--item-index: 3">
+      <img src="https://picsum.photos/1920/1080?random=4" alt="">
+    </div>
+    <div class="item" style="--item-index: 4">
+      <img src="https://picsum.photos/1920/1080?random=5" alt="">
+    </div>
+  </div>
+</div>
+
+<div class="trigwarning">This browser is not supported... yet. CSS Trigonometry is currently supported in Safari, Firefox, and Chrome Canary with the "Experimental Web Platform Features" flag enabled.</div>
+
+<!-- only to add/remove items and adjust spacing -->
+<div class="ctrls">
+  <label>Items</label><label>Spacing</label>
+  <input type="range" value="5" min="3" max="10" oninput="updateItems(this)">
+  <input type="range" value="0" min=0 max="10" oninput="updateSpacing(this)">
+</div>
+
+<!-- for demo -->
+<script>
+  function updateSpacing(e){
+    const n = parseInt(e.value);
+    if(n < 0 || n > 10) return;
+    const itemsEl = document.querySelector(".items");
+    itemsEl.style.setProperty("--spacing", n + 'vmin');
+  }
+  function updateItems(e){
+    const n = parseInt(e.value)
+    if(n < 3 || n > 10) return;
+    const itemsEl = document.querySelector(".items");
+    itemsEl.style.setProperty("--items-total", n);
+    itemsEl.innerHTML = "";
+    for(let i = 0; i < n; i++){
+      const item = document.createElement("div");
+      item.classList.add("item");
+      item.style.setProperty("--item-index", i);
+      item.innerHTML = `<img src="https://picsum.photos/1920/1080?random=${i+1}" alt="">`
+      itemsEl.append(item)
+    }
+  }
+</script>
+<!-- partial -->
+  
+</body>
+</html>

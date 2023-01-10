@@ -1,0 +1,55 @@
+@layer demo, carousel3d;
+
+@layer carousel3d {
+  .carousel3d { perspective: 1000px; display: grid; place-items: center }
+  .carousel3d *:not(:empty) { transform-style: preserve-3d }
+  .carousel3d > .items { 
+    --width: 50vmin;
+    --spacing: 0vmin; 
+    display: grid;
+    width: var(--width);
+    aspect-ratio: 1/1;
+    
+    /* props for single items */
+    --angle: calc(360deg / var(--items-total));
+    /* calc z-translate   */
+    --C: calc(var(--angle) / 2);
+    --B: calc(90deg - var(--C));
+    --c: calc(var(--width) / 2);
+    --b: calc(var(--c) * sin(var(--B)) / sin(var(--C)));
+    --tz: calc(var(--b) + var(--spacing, 0));   
+    
+    /* move back to keep front item correct size */
+    translate: 0 0 calc(var(--tz) * -1); 
+  }
+  .carousel3d > .items >.item { 
+    grid-area: 1/1;
+    transform: 
+      rotateY(calc(var(--angle) * var(--item-index))) 
+      translateZ(var(--tz));
+  }
+  
+  /* animation   */
+  .carousel3d > .items { 
+    animation: carousel3dRotate calc(var(--items-total) * 3s) linear infinite 
+  }
+  .carousel3d > .items:hover { 
+    animation-play-state: paused 
+  }
+  @keyframes carousel3dRotate { 
+    to { transform: rotateY(360deg) }
+  }
+  
+  .item {display: flex }
+  .item > img { width: 100%; height: 100%; object-fit: cover }
+}
+
+@layer demo {
+  * { box-sizing: border-box }
+  html, body { height: 100%; margin: 0; text-align: center; color: rgb(199, 39, 39); font-family: system-ui, sans-serif }
+  body { padding: 2rem; display: grid; place-items: center; background-color: #000000; overflow-x: hidden }
+  .ctrls { position: fixed; top: 1rem; margin-inline: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 0 1rem }
+  .trigwarning { position: fixed; padding: 1rem; bottom: 1rem; margin-inline: auto; text-align: center; color: hsl(50 70% 50%) }
+  @supports(top: calc(sin(1) * 1px)) { .trigwarning {display: none } }
+
+}
