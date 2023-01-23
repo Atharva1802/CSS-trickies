@@ -1,0 +1,236 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --background-color: #bbdefb;
+  --blue-50: #e3f2fd;
+  --blue-100: #bbdefb;
+  --blue-A700: #2962ff;
+  --green-50: #e8f5e9;
+  --green-100: #c8e6c9;
+  --green-A700: #00c853;
+  --purple-50: #f3e5f5;
+  --purple-100: #e1bee7;
+  --purple-A700: #aa00ff;
+  --orange-50: #fff3e0;
+  --orange-100: #ffe0b2;
+  --orange-A700: #ff6d00;
+  --orange-700: #f57c00;
+  --grey-900: #212121;
+  --white: #ffffff;
+  --round-button-active-color: #212121;
+  --translate-main-slider: 100%;
+  --main-slider-color: #e3f2fd;
+  --translate-filters-slider: 0;
+  --filters-container-height: 3.8rem;
+  --filters-wrapper-opacity: 1;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.4s ease-in-out;
+  background-color: var(--background-color);
+}
+
+button {
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+}
+
+nav.amazing-tabs {
+  background-color: var(--white);
+  border-radius: 2.5rem;
+  user-select: none;
+  padding-top: 1rem;
+}
+
+.main-tabs-container {
+  padding: 0 1rem 1rem 1rem;
+}
+
+.main-tabs-wrapper {
+  position: relative;
+}
+
+ul.main-tabs,
+ul.filter-tabs {
+  list-style-type: none;
+  display: flex;
+}
+
+ul.main-tabs li {
+  display: inline-flex;
+  position: relative;
+  padding: 1.5rem;
+  z-index: 1;
+}
+
+.avatar,
+.avatar img {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.avatar img {
+  object-fit: cover;
+}
+
+.round-button {
+  height: 4.8rem;
+  width: 4.8rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--grey-900);
+  transition: color 0.2s ease-in-out;
+}
+
+.round-button:hover,
+.round-button.active {
+  color: var(--round-button-active-color);
+}
+
+.round-button svg {
+  pointer-events: none;
+  height: 2.8rem;
+  width: 2.8rem;
+  transform: translate(0, 0);
+}
+
+.main-slider {
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1.5rem;
+  z-index: 0;
+  transition: transform 0.4s ease-in-out;
+  transform: translateX(var(--translate-main-slider));
+}
+
+.main-slider-circle {
+  height: 4.8rem;
+  width: 4.8rem;
+  border-radius: 50%;
+  transition: background-color 0.4s ease-in-out;
+  background-color: var(--main-slider-color);
+}
+
+.animate-jello {
+  animation: jello-horizontal 0.9s both;
+}
+
+@keyframes jello-horizontal {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+  30% {
+    transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+.filters-container {
+  overflow: hidden;
+  padding: 0 3rem;
+  transition: max-height 0.4s ease-in-out;
+  max-height: var(--filters-container-height);
+}
+
+.filters-wrapper {
+  position: relative;
+  transition: opacity 0.2s ease-in-out;
+  opacity: var(--filters-wrapper-opacity);
+}
+
+.filter-tabs {
+  border-radius: 1rem;
+  padding: 0.3rem;
+  overflow: hidden;
+  background-color: var(--orange-50);
+}
+
+.filter-tabs li {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 0 33.33%;
+}
+
+.filter-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.8rem;
+  flex-grow: 1;
+  height: 3rem;
+  padding: 0 1.5rem;
+  color: var(--orange-700);
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.filter-button.filter-active {
+  transition: color 0.4s ease-in-out;
+  color: var(--grey-900);
+}
+
+.filter-slider {
+  pointer-events: none;
+  position: absolute;
+  padding: 0.3rem;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+}
+
+.filter-slider-rect {
+  height: 3rem;
+  width: 33.33%;
+  border-radius: 0.8rem;
+  background-color: var(--white);
+  box-shadow: 0 0.1rem 1rem -0.4rem rgba(0, 0, 0, 0.12);
+  transition: transform 0.4s ease-in-out;
+  transform: translateX(var(--translate-filters-slider));
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Jello Tab Bar (Animated)</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<nav class="amazing-tabs">
+  <div class="filters-container">
+    <div class="filters-wrapper">
+      <ul class="filter-tabs">
+        <li>
+          <button class="filter-button filter-active" data-translate-value="0">
+            New
+          </button>
+        </li>
+        <li>
+          <button class="filter-button" data-translate-value="100%">
+            Popular
+          </button>
+        </li>
+        <li>
+          <button class="filter-button" data-translate-value="200%">
+            Following
+          </button>
+        </li>
+      </ul>
+      <div class="filter-slider" aria-hidden="true">
+        <div class="filter-slider-rect">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+  <div class="main-tabs-container">
+    <div class="main-tabs-wrapper">
+      <ul class="main-tabs">
+        <li>
+          <button class="round-button" data-translate-value="0" data-color="red">
+            <span class="avatar">
+              <img src="https://images.pexels.com/photos/3756985/pexels-photo-3756985.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="user avatar" />
+            </span>
+          </button>
+        </li>
+        <li>
+          <button class="round-button gallery active" style="--round-button-active-color: #2962ff" data-translate-value="100%" data-color="blue">
+            <svg fill="currentColor" viewBox="0 0 16 16">
+              <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+              <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z" />
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="round-button" style="--round-button-active-color: #00c853" data-translate-value="200%" data-color="green">
+            <svg fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="round-button" style="--round-button-active-color: #aa00ff" data-translate-value="300%" data-color="purple">
+            <svg fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z" />
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button class="round-button" style="--round-button-active-color: #ff6d00" data-translate-value="400%" data-color="orange">
+            <svg fill="currentColor" viewBox="0 0 16 16">
+              <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
+            </svg>
+          </button>
+        </li>
+      </ul>
+      <div class="main-slider" aria-hidden="true">
+        <div class="main-slider-circle">&nbsp;</div>
+      </div>
+    </div>
+  </div>
+</nav>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
