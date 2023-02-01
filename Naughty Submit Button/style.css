@@ -1,0 +1,59 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+  body {
+    background-image:"https://malatyahaber.com/fotolar/2022/05/kayit-altinda-80-irk-kedi-var1936.jpg";
+  }
+  .container {
+    width: 31.25em;
+    background-color: #4b4b4b;
+    padding: 1.4em 3.75em;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    border-radius: 0.7em;
+    box-shadow: 0 1em 4em rgba(71, 50, 4, 0.3);
+  }
+  h2{
+    text-align: center;
+    font-size: 32px;
+    margin-bottom: 30px;
+    color: rgb(255, 255, 255);
+  }
+  input,
+  #submit {
+    border: none;
+    outline: none;
+    display: block;
+    color: rgb(68, 63, 63);
+
+  }
+  input {
+    width: 100%;
+    background-color: transparent;
+    margin-bottom: 2em;
+    font-size: 20px;
+    padding: 1em 0 0.5em 0.5em;
+    border-bottom: 2px solid #ffffff;
+  }
+  #submit {
+    position: relative;
+    left: 0;
+    font-size: 1.1em;
+    width: 7em;
+    background-color: #c4c7da;
+    color: rgb(85, 85, 85);
+    padding: 0.8em 0;
+    margin-top: 2em;
+    border-radius: 0.3em;
+  }
+  #message-ref {
+    font-size: 0.9em;
+    margin-top: 1.5em;
+    color: #34bd34;
+    visibility: hidden;
+  }
