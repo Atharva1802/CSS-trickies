@@ -1,0 +1,33 @@
+.wrapper
+  section
+    header
+      h2 Hello
+    p.subheader Lorem ipsum dolor sit amet, dictumst orci dignissim, ipsum et etiam dui, omnis dictumst ipsum nibh eu dolor id ut dignissim sed wisi litora. Pellentesque vel ipsum sit aenean a et justo.
+    .container
+      .card.flipY
+        .flip-container
+            figure.front
+              img(src="https://images.unsplash.com/photo-1606586740500-a98d83e65d1c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1234&q=80")
+            figure.back
+              h5 First Last
+              p.title Developer
+              .bio Lorem ipsum dolor sit amet, conectetur adipiscing elit. Cras vitae nibh eget urna ette condimentum convallis.
+              .container.social
+                .icon.fa.fa-envelope-o
+                .icon.fa.fa-twitter
+                .icon.fa.fa-linkedin
+      - var classList = ["slideDown", "slideUp", "slideLeft", "fadeIn"]
+      - for (var i = 0; i < 4; ++i) {
+        div(class='card ' + classList[i])
+            .overflow-wrapper
+              figure.front
+                img(src="https://images.unsplash.com/photo-1606586740500-a98d83e65d1c?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1234&q=80")
+              figure.back
+                h5 First Last
+                p.title Developer
+                .bio Lorem ipsum dolor sit amet, conectetur adipiscing elit. Cras vitae nibh eget urna ette condimentum convallis.
+                .container.social
+                  .icon.fa.fa-envelope-o
+                  .icon.fa.fa-twitter
+                  .icon.fa.fa-linkedin
+      - }

@@ -1,0 +1,166 @@
+*
+  box-sizing border-box
+
+:root
+  --filament-saturation 0
+  --filament-lightness 40
+  --fitting-lightness 30
+  --chord-lightness 50
+  --bg-lightness 5
+  --glass-lightness 30
+  --glass-saturation 0
+  --light-alpha 0
+  --ceiling 50
+  --bulb-hue 60
+
+  // @media(prefers-color-scheme: light)
+  //   --chord-lightness 40
+  //   --bg-lightness 90
+  //   --glass-lightness 80
+  //   --glass-saturation 0
+  //   --filament-saturation 0
+  //   --filament-lightness 70
+  //   --fitting-lightness 80
+  //   --light-alpha 0
+  //   --ceiling 40
+  //   --bulb-hue 60
+
+body
+  background 'hsl(215, 100%, %s)' % calc(var(--bg-lightness) * 1%)
+  display flex
+  align-items center
+  justify-content center
+  min-height 100vh
+
+svg
+  width 90vmin
+  transform translate(0, -30%)
+
+.wrapper
+  position relative
+  &:after
+    content ""
+    width 90vmin
+    position absolute
+    bottom 130%
+    left 0%
+    border-bottom '4px solid hsl(0, 0%, %s)' % calc(var(--ceiling) * 1%)
+    transform translate(0, 2px)
+
+.light-bulb
+  display block
+
+  &__chord
+    stroke 'hsl(0, 0%, %s)' % calc(var(--chord-lightness) * 1%)
+
+  &__glass
+    fill 'hsla(%s, 100%, %s, %s)' % (var(--bulb-hue) calc(var(--glass-lightness) * 1%) var(--light-alpha))
+    stroke 'hsla(%s, %s, %s, 1)' % (var(--bulb-hue) calc(var(--glass-saturation) * 1%) calc(var(--glass-lightness) * 1%))
+
+  &__filament
+    fill none
+    stroke 'hsl(60, %s, %s)' % (calc(var(--filament-saturation) * 1%) calc(var(--filament-lightness) * 1%))
+
+  &__fitting
+    fill 'hsl(0, 0%, %s)' % calc(var(--fitting-lightness) * 1%)
+
+  &__fitting-shine
+    fill 'hsl(0, 0%, %s)' % calc((var(--fitting-lightness) + 20) * 1%)
+
+  &__bloom
+    fill none
+    stroke 'hsl(%s, 100%, 50%)' % var(--bulb-hue)
+    stroke-width 2
+    opacity 0
+
+
+// EASTER EGG
+[type='checkbox']
+  position fixed
+  bottom 1rem
+  opacity .1
+
+  &:nth-of-type(1)
+    right 1rem
+
+    &:checked ~ .wrapper svg
+      .light-bulb:nth-of-type(odd)
+        --bulb-hue 90
+      .light-bulb:nth-of-type(even)
+        --bulb-hue 0
+
+  &:nth-of-type(2)
+    right 2rem
+
+    &:checked ~ .wrapper svg
+      .light-bulb--1
+        --bulb-hue 0
+      .light-bulb--2
+        --bulb-hue 30
+      .light-bulb--3
+        --bulb-hue 60
+      .light-bulb--4
+        --bulb-hue 90
+      .light-bulb--5
+        --bulb-hue 200
+      .light-bulb--6
+        --bulb-hue 270
+
+  &:nth-of-type(3)
+    right 3rem
+
+    &:checked ~ .wrapper svg
+      .light-bulb--1
+        --bulb-hue 60
+      .light-bulb--2
+        --bulb-hue 120
+      .light-bulb--3
+        --bulb-hue 180
+      .light-bulb--4
+        --bulb-hue 240
+      .light-bulb--5
+        --bulb-hue 300
+      .light-bulb--6
+        --bulb-hue 360
+
+  &:nth-of-type(4)
+    right 4rem
+
+    &:checked ~ .wrapper svg
+      .light-bulb--1
+        --bulb-hue 10
+      .light-bulb--2
+        --bulb-hue 20
+      .light-bulb--3
+        --bulb-hue 30
+      .light-bulb--4
+        --bulb-hue 40
+      .light-bulb--5
+        --bulb-hue 50
+      .light-bulb--6
+        --bulb-hue 60
+
+.banner-container
+  position fixed
+  bottom 0
+  left 50%
+  transform translate(-50%, 0)
+
+.hue-banner
+  color 'hsl(%s, 100%, 50%)' % var(--hue, 0)
+  border-color 'hsl(%s, 100%, 50%)' % var(--hue, 0)
+  border-style solid
+  border-width 4px
+  border-radius 4px
+  margin-bottom 1rem
+  padding 1rem
+  font-weight bold
+  font-family -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+  line-height 1.5
+  animation fadeToBlack 0.5s 1s both
+
+@keyframes fadeToBlack
+  to
+    opacity 0
+
+

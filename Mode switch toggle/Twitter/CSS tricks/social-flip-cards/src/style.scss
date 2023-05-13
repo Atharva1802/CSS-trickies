@@ -1,0 +1,123 @@
+@import "compass/css3";
+
+section {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  	margin: -135px -180px;
+  width: 360px;
+  min-height: 270px;
+  font-size: 35px;
+  text-align: center;
+}
+a {
+  display: inline-block;
+  position: relative;
+  float: left;
+  width: 80px;
+  height: 80px;
+  margin: 5px;
+}
+article {
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #333;
+  box-shadow: 0 0 6px -2px #000, 0 0 45px -20px #000;
+  color: #fff;
+  line-height: 90px;
+  transform: perspective(300px) rotateY(0deg);
+  transition: transform 0.4s linear, background-color 0s linear 0.2s, color 0s linear 0.2s;
+  a:hover & {
+    transform: perspective(300px) rotateY(180deg);
+    color: #eee;
+  	transition: transform 0.2s linear, background-color 0s linear 0.1s, color 0s linear 0.1s;
+  }
+  a:nth-child(1):hover & {background-color: #3B5998;}
+  a:nth-child(2):hover & {background-color: #00ACED;}
+  a:nth-child(3):hover & {background-color: #2C4762;}
+  a:nth-child(4):hover & {background-color: #CB2027;}
+  a:nth-child(5):hover & {background-color: #1769FF;}
+  a:nth-child(6):hover & {background-color: #4183C4;}
+  a:nth-child(7):hover & {background-color: #3399CC;}
+  a:nth-child(8):hover & {background-color: #EA4C89;}
+  a:nth-child(9):hover & {background-color: #3F729B;}
+  a:nth-child(10):hover & {background-color: #FF0084;}
+  a:nth-child(11):hover & {background-color: #F26300;}
+  a:nth-child(12):hover & {background-color: #445566;}
+}
+span {
+  transition: transform 0s linear 0.2s, text-shadow 0s linear 0.2s;
+  display: block;
+  -webkit-font-smoothing: subpixel-antialiased;
+  font-smoothing: antialiased;
+  a:hover & {
+  	transition: transform 0s linear 0.1s, text-shadow 0s linear 0.1s;
+    transform: scale(-1, 1);
+    text-shadow: 0 0 50px rgba(255,255,255,0.5);
+  }
+}
+body {
+  @include background(linear-gradient(left, #BADEA6, #B3DEA6 50%, #BADEA6));
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@font-face {
+  font-family: "SSSocial";
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2361/ss-social-regular.eot');
+  src: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2361/ss-social-regular.eot?#iefix') format('embedded-opentype'),
+       url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2361/ss-social-regular.woff') format('woff'),
+       url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2361/ss-social-regular.ttf') format('truetype'),
+       url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/2361/ss-social-regular.svg#SSSocialRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* This triggers a redraw in IE to Fix IE8's :before content rendering. */
+html:hover [class^="ss-"]{-ms-zoom: 1;}
+
+.ss-icon, .ss-icon.ss-social, .ss-icon.ss-social-circle,
+[class^="ss-"]:before, [class*=" ss-"]:before,
+[class^="ss-"][class*=" ss-social"]:before, [class*=" ss-"][class*=" ss-social"]:before,
+[class^="ss-"].right:after, [class*=" ss-"].right:after,
+[class^="ss-"][class*=" ss-social"].right:after, [class*=" ss-"][class*=" ss-social"].right:after{
+  font-family: "SSSocial";
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: none;
+  text-rendering: optimizeLegibility;
+  white-space: nowrap;
+  -moz-font-feature-settings: "liga=1";
+  -moz-font-feature-settings: "liga";
+  -ms-font-feature-settings: "liga" 1;
+  -o-font-feature-settings: "liga";
+  font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+}
+
+.ss-icon.ss-social-circle,
+[class^="ss-"].ss-social-circle:before, [class*=" ss-"].ss-social-circle:before,
+[class^="ss-"].ss-social-circle.right:after, [class*=" ss-"].ss-social-circle.right:after{
+  font-weight: bold;
+}
+
+[class^="ss-"].right:before,
+[class*=" ss-"].right:before{display:none;content:'';}

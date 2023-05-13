@@ -1,0 +1,184 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+/* Some basic CSS overrides */
+body {
+  line-height: 1.5;
+  min-height: 100vh;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  justify-content: center;
+  color: #b4bcd0;
+  background-color: #18181b;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+/* End basic CSS override */
+:root {
+  --color-text-primary: rgb(180, 188, 208);
+  --color-text-secondary: rgb(255, 255, 255);
+  --color-background-primary: rgb(24, 24, 27);
+  --color-background-secondary: rgb(34, 35, 38);
+  --color-border: rgb(49, 48, 53);
+  --color-accent: rgb(85, 214, 121);
+  --shadow-alpha: 0.25;
+  --spinner: var(--color-accent);
+}
+:root :has(.theme-toggle input:checked) {
+  --color-text-primary: rgb(105, 105, 105);
+  --color-text-secondary: rgb(0, 0, 0);
+  --color-background-primary: rgb(242, 247, 249);
+  --color-background-secondary: rgb(255, 255, 255);
+  --color-border: rgb(222, 222, 222);
+  --color-accent: rgb(147, 51, 234);
+  --shadow-alpha: 0.025;
+  --spinner: var(--color-accent);
+}
+
+body {
+  color: var(--color-text-primary);
+  background-color: var(--color-background-primary);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+
+.button-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.button {
+  font-size: 1.5rem;
+  border-radius: 99em;
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  cursor: pointer;
+  width: 3.5rem;
+  height: 3.5rem;
+  transition: color 0.15s ease, width 0.25s ease-out;
+  position: relative;
+  background-color: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 8px 0 rgba(0 0 0/var(--shadow-alpha));
+}
+.button--play {
+  width: 4.5rem;
+  height: 4.5rem;
+  position: relative;
+}
+.button--play:after {
+  content: "";
+  display: block;
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  z-index: -1;
+  left: -3px;
+  top: -3px;
+  position: absolute;
+  background-image: conic-gradient(transparent, var(--spinner));
+  border-radius: 99em;
+  opacity: 0;
+}
+.button--play .ph-play,
+.button--play .ph-pause {
+  grid-row-start: 1;
+  grid-column-start: 1;
+  transition: opacity 0.15s ease, transform 0.25s ease;
+}
+.button--play .ph-play {
+  opacity: 1;
+}
+.button--play .ph-pause {
+  opacity: 0;
+  transform: rotate(0);
+}
+.button--play.is-active .ph-play {
+  opacity: 0;
+  transform: rotate(180deg);
+}
+.button--play.is-active .ph-pause {
+  opacity: 1;
+  transform: rotate(180deg);
+}
+.button--play.is-active:after {
+  opacity: 1;
+  -webkit-animation: spin 2s linear infinite;
+          animation: spin 2s linear infinite;
+}
+.button:hover {
+  color: var(--color-text-secondary);
+}
+.button.is-active {
+  color: var(--color-accent);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 99em;
+  background-color: var(--color-background-secondary);
+  padding: 0.375em 1em;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+.theme-toggle:hover {
+  color: var(--color-text-secondary);
+}
+.theme-toggle:has(input:focus-visible) {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 4px;
+}
+.theme-toggle i {
+  flex-shrink: 0;
+}
+.theme-toggle input {
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(50%);
+          clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+@-webkit-keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}

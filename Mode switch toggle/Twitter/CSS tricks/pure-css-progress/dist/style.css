@@ -1,0 +1,793 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700,300);
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: #000000;
+}
+
+html {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle;
+}
+
+q, blockquote {
+  quotes: none;
+}
+q:before, q:after, blockquote:before, blockquote:after {
+  content: "";
+  content: none;
+}
+
+a img {
+  border: none;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1em;
+  text-align: center;
+  color: #ffffff;
+  background: #000000;
+}
+
+h1 {
+  font-size: 2.5em;
+  margin: 2em 0 .5em;
+}
+
+h2 {
+  margin-bottom: 3em;
+}
+
+em,
+strong {
+  font-weight: 700;
+}
+
+input {
+  display: none;
+}
+
+header p {
+  margin-bottom: 0;
+}
+
+section {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  margin-bottom: 2em;
+  padding: 0;
+}
+section:last-of-type {
+  margin-bottom: 0;
+}
+section article {
+  align-self: center;
+  width: 20em;
+  margin-bottom: 2em;
+}
+section article p, section article:last-of-type {
+  margin-bottom: 0;
+}
+
+p {
+  line-height: 1.5em;
+  max-width: 20em;
+  margin: 1.5em auto 2em;
+  padding-bottom: 1.5em;
+}
+p span {
+  display: block;
+}
+
+.container {
+  z-index: 1;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 4em;
+}
+
+/*
+*
+*
+START // CHART'S RULES
+ -> "if you're picking code, don't forget the variables :)"
+*/
+.chart {
+  font-size: 1em;
+  perspective: 1000px;
+  perspective-origin: 50% 50%;
+  -webkit-backface-visibility: visible;
+          backface-visibility: visible;
+}
+
+.bar {
+  font-size: 1em;
+  position: relative;
+  height: 10em;
+  transition: all 0.3s ease-in-out;
+  transform: rotateX(60deg) rotateY(0deg);
+  transform-style: preserve-3d;
+}
+.bar .face {
+  font-size: 2em;
+  position: relative;
+  width: 100%;
+  height: 2em;
+  background-color: rgba(254, 254, 254, 0.3);
+}
+.bar .face.side-a, .bar .face.side-b {
+  width: 2em;
+}
+.bar .side-a {
+  transform: rotateX(90deg) rotateY(-90deg) translateX(2em) translateY(1em) translateZ(1em);
+}
+.bar .side-b {
+  transform: rotateX(90deg) rotateY(-90deg) translateX(4em) translateY(1em) translateZ(-1em);
+  position: absolute;
+  right: 0;
+}
+.bar .side-0 {
+  transform: rotateX(90deg) rotateY(0) translateX(0) translateY(1em) translateZ(-1em);
+}
+.bar .side-1 {
+  transform: rotateX(90deg) rotateY(0) translateX(0) translateY(1em) translateZ(3em);
+}
+.bar .top {
+  transform: rotateX(0deg) rotateY(0) translateX(0em) translateY(4em) translateZ(2em);
+}
+.bar .floor {
+  box-shadow: 0 0.1em 0.6em rgba(0, 0, 0, 0.3), 0.6em -0.5em 3em rgba(0, 0, 0, 0.3), 1em -1em 8em #fefefe;
+}
+
+.growing-bar {
+  transition: all 0.3s ease-in-out;
+  background-color: rgba(236, 0, 140, 0.6);
+  width: 100%;
+  height: 2em;
+}
+
+.bar.yellow .side-a,
+.bar.yellow .growing-bar {
+  background-color: rgba(241, 196, 15, 0.6);
+}
+.bar.yellow .side-0 .growing-bar {
+  box-shadow: -0.5em -1.5em 4em rgba(241, 196, 15, 0.8);
+}
+.bar.yellow .floor .growing-bar {
+  box-shadow: 0em 0em 2em rgba(241, 196, 15, 0.8);
+}
+
+.bar.red .side-a, input[id='red']:checked ~ .chart .side-a,
+.bar.red .growing-bar,
+input[id='red']:checked ~ .chart .growing-bar {
+  background-color: rgba(236, 0, 140, 0.6);
+}
+.bar.red .side-0 .growing-bar, input[id='red']:checked ~ .chart .side-0 .growing-bar {
+  box-shadow: -0.5em -1.5em 4em rgba(236, 0, 140, 0.8);
+}
+.bar.red .floor .growing-bar, input[id='red']:checked ~ .chart .floor .growing-bar {
+  box-shadow: 0em 0em 2em rgba(236, 0, 140, 0.8);
+}
+
+.bar.cyan .side-a, input[id='cyan']:checked ~ .chart .side-a,
+.bar.cyan .growing-bar,
+input[id='cyan']:checked ~ .chart .growing-bar {
+  background-color: rgba(87, 202, 244, 0.6);
+}
+.bar.cyan .side-0 .growing-bar, input[id='cyan']:checked ~ .chart .side-0 .growing-bar {
+  box-shadow: -0.5em -1.5em 4em #57caf4;
+}
+.bar.cyan .floor .growing-bar, input[id='cyan']:checked ~ .chart .floor .growing-bar {
+  box-shadow: 0em 0em 2em #57caf4;
+}
+
+.bar.navy .side-a,
+.bar.navy .growing-bar {
+  background-color: rgba(10, 64, 105, 0.6);
+}
+.bar.navy .side-0 .growing-bar {
+  box-shadow: -0.5em -1.5em 4em rgba(10, 64, 105, 0.8);
+}
+.bar.navy .floor .growing-bar {
+  box-shadow: 0em 0em 2em rgba(10, 64, 105, 0.8);
+}
+
+.bar.lime .side-a, input[id='lime']:checked ~ .chart .side-a,
+.bar.lime .growing-bar,
+input[id='lime']:checked ~ .chart .growing-bar {
+  background-color: rgba(118, 201, 0, 0.6);
+}
+.bar.lime .side-0 .growing-bar, input[id='lime']:checked ~ .chart .side-0 .growing-bar {
+  box-shadow: -0.5em -1.5em 4em #76c900;
+}
+.bar.lime .floor .growing-bar, input[id='lime']:checked ~ .chart .floor .growing-bar {
+  box-shadow: 0em 0em 2em #76c900;
+}
+
+.bar.white .side-a,
+.bar.white .growing-bar {
+  background-color: rgba(254, 254, 254, 0.6);
+}
+.bar.white .side-0 .growing-bar {
+  box-shadow: -0.5em -1.5em 4em #fefefe;
+}
+.bar.white .floor .growing-bar {
+  box-shadow: 0em 0em 2em #fefefe;
+}
+
+.bar.gray .side-a,
+.bar.gray .growing-bar {
+  background-color: rgba(68, 68, 68, 0.6);
+}
+.bar.gray .side-0 .growing-bar {
+  box-shadow: -0.5em -1.5em 4em #444;
+}
+.bar.gray .floor .growing-bar {
+  box-shadow: 0em 0em 2em #444;
+}
+
+.chart .bar.yellow-face .face {
+  background-color: rgba(241, 196, 15, 0.2);
+}
+
+.chart .bar.lime-face .face {
+  background-color: rgba(118, 201, 0, 0.2);
+}
+
+.chart .bar.red-face .face {
+  background-color: rgba(236, 0, 140, 0.2);
+}
+
+.chart .bar.navy-face .face {
+  background-color: rgba(10, 64, 105, 0.2);
+}
+
+.chart .bar.cyan-face .face {
+  background-color: rgba(87, 202, 244, 0.2);
+}
+
+.chart .bar.gray-face .face {
+  background-color: rgba(68, 68, 68, 0.2);
+}
+
+.chart .bar.lightGray-face .face {
+  background-color: rgba(145, 145, 145, 0.2);
+}
+
+.bar-0 .growing-bar {
+  width: 0%;
+}
+
+.bar-1 .growing-bar {
+  width: 1%;
+}
+
+.bar-2 .growing-bar {
+  width: 2%;
+}
+
+.bar-3 .growing-bar {
+  width: 3%;
+}
+
+.bar-4 .growing-bar {
+  width: 4%;
+}
+
+.bar-5 .growing-bar {
+  width: 5%;
+}
+
+.bar-6 .growing-bar {
+  width: 6%;
+}
+
+.bar-7 .growing-bar {
+  width: 7%;
+}
+
+.bar-8 .growing-bar {
+  width: 8%;
+}
+
+.bar-9 .growing-bar {
+  width: 9%;
+}
+
+.bar-10 .growing-bar {
+  width: 10%;
+}
+
+.bar-11 .growing-bar {
+  width: 11%;
+}
+
+.bar-12 .growing-bar {
+  width: 12%;
+}
+
+.bar-13 .growing-bar {
+  width: 13%;
+}
+
+.bar-14 .growing-bar {
+  width: 14%;
+}
+
+.bar-15 .growing-bar {
+  width: 15%;
+}
+
+.bar-16 .growing-bar {
+  width: 16%;
+}
+
+.bar-17 .growing-bar {
+  width: 17%;
+}
+
+.bar-18 .growing-bar {
+  width: 18%;
+}
+
+.bar-19 .growing-bar {
+  width: 19%;
+}
+
+.bar-20 .growing-bar, input[id='exercise-2']:checked ~ .chart.grid .exercise .bar:nth-child(1) .growing-bar {
+  width: 20%;
+}
+
+.bar-21 .growing-bar {
+  width: 21%;
+}
+
+.bar-22 .growing-bar {
+  width: 22%;
+}
+
+.bar-23 .growing-bar {
+  width: 23%;
+}
+
+.bar-24 .growing-bar {
+  width: 24%;
+}
+
+.bar-25 .growing-bar, input[id='pos-0']:checked ~ .chart .growing-bar {
+  width: 25%;
+}
+
+.bar-26 .growing-bar {
+  width: 26%;
+}
+
+.bar-27 .growing-bar {
+  width: 27%;
+}
+
+.bar-28 .growing-bar {
+  width: 28%;
+}
+
+.bar-29 .growing-bar {
+  width: 29%;
+}
+
+.bar-30 .growing-bar {
+  width: 30%;
+}
+
+.bar-31 .growing-bar {
+  width: 31%;
+}
+
+.bar-32 .growing-bar {
+  width: 32%;
+}
+
+.bar-33 .growing-bar {
+  width: 33%;
+}
+
+.bar-34 .growing-bar {
+  width: 34%;
+}
+
+.bar-35 .growing-bar {
+  width: 35%;
+}
+
+.bar-36 .growing-bar {
+  width: 36%;
+}
+
+.bar-37 .growing-bar {
+  width: 37%;
+}
+
+.bar-38 .growing-bar {
+  width: 38%;
+}
+
+.bar-39 .growing-bar {
+  width: 39%;
+}
+
+.bar-40 .growing-bar {
+  width: 40%;
+}
+
+.bar-41 .growing-bar {
+  width: 41%;
+}
+
+.bar-42 .growing-bar {
+  width: 42%;
+}
+
+.bar-43 .growing-bar {
+  width: 43%;
+}
+
+.bar-44 .growing-bar {
+  width: 44%;
+}
+
+.bar-45 .growing-bar {
+  width: 45%;
+}
+
+.bar-46 .growing-bar {
+  width: 46%;
+}
+
+.bar-47 .growing-bar {
+  width: 47%;
+}
+
+.bar-48 .growing-bar {
+  width: 48%;
+}
+
+.bar-49 .growing-bar {
+  width: 49%;
+}
+
+.bar-50 .growing-bar, input[id='pos-1']:checked ~ .chart .growing-bar, input[id='exercise-2']:checked ~ .chart.grid .exercise .bar:nth-child(2) .growing-bar, input[id='exercise-4']:checked ~ .chart.grid .exercise .bar:nth-child(1) .growing-bar, input[id='exercise-4']:checked ~ .chart.grid .exercise .bar:nth-child(2) .growing-bar {
+  width: 50%;
+}
+
+.bar-51 .growing-bar {
+  width: 51%;
+}
+
+.bar-52 .growing-bar {
+  width: 52%;
+}
+
+.bar-53 .growing-bar {
+  width: 53%;
+}
+
+.bar-54 .growing-bar {
+  width: 54%;
+}
+
+.bar-55 .growing-bar {
+  width: 55%;
+}
+
+.bar-56 .growing-bar {
+  width: 56%;
+}
+
+.bar-57 .growing-bar {
+  width: 57%;
+}
+
+.bar-58 .growing-bar {
+  width: 58%;
+}
+
+.bar-59 .growing-bar {
+  width: 59%;
+}
+
+.bar-60 .growing-bar {
+  width: 60%;
+}
+
+.bar-61 .growing-bar {
+  width: 61%;
+}
+
+.bar-62 .growing-bar {
+  width: 62%;
+}
+
+.bar-63 .growing-bar {
+  width: 63%;
+}
+
+.bar-64 .growing-bar {
+  width: 64%;
+}
+
+.bar-65 .growing-bar {
+  width: 65%;
+}
+
+.bar-66 .growing-bar {
+  width: 66%;
+}
+
+.bar-67 .growing-bar {
+  width: 67%;
+}
+
+.bar-68 .growing-bar {
+  width: 68%;
+}
+
+.bar-69 .growing-bar {
+  width: 69%;
+}
+
+.bar-70 .growing-bar, input[id='exercise-3']:checked ~ .chart.grid .exercise .bar:nth-child(1) .growing-bar, input[id='exercise-3']:checked ~ .chart.grid .exercise .bar:nth-child(2) .growing-bar, input[id='exercise-3']:checked ~ .chart.grid .exercise .bar:nth-child(3) .growing-bar {
+  width: 70%;
+}
+
+.bar-71 .growing-bar {
+  width: 71%;
+}
+
+.bar-72 .growing-bar {
+  width: 72%;
+}
+
+.bar-73 .growing-bar {
+  width: 73%;
+}
+
+.bar-74 .growing-bar {
+  width: 74%;
+}
+
+.bar-75 .growing-bar, input[id='pos-2']:checked ~ .chart .growing-bar {
+  width: 75%;
+}
+
+.bar-76 .growing-bar {
+  width: 76%;
+}
+
+.bar-77 .growing-bar {
+  width: 77%;
+}
+
+.bar-78 .growing-bar {
+  width: 78%;
+}
+
+.bar-79 .growing-bar {
+  width: 79%;
+}
+
+.bar-80 .growing-bar, input[id='exercise-2']:checked ~ .chart.grid .exercise .bar:nth-child(3) .growing-bar {
+  width: 80%;
+}
+
+.bar-81 .growing-bar {
+  width: 81%;
+}
+
+.bar-82 .growing-bar {
+  width: 82%;
+}
+
+.bar-83 .growing-bar {
+  width: 83%;
+}
+
+.bar-84 .growing-bar {
+  width: 84%;
+}
+
+.bar-85 .growing-bar {
+  width: 85%;
+}
+
+.bar-86 .growing-bar {
+  width: 86%;
+}
+
+.bar-87 .growing-bar {
+  width: 87%;
+}
+
+.bar-88 .growing-bar {
+  width: 88%;
+}
+
+.bar-89 .growing-bar {
+  width: 89%;
+}
+
+.bar-90 .growing-bar {
+  width: 90%;
+}
+
+.bar-91 .growing-bar {
+  width: 91%;
+}
+
+.bar-92 .growing-bar {
+  width: 92%;
+}
+
+.bar-93 .growing-bar {
+  width: 93%;
+}
+
+.bar-94 .growing-bar {
+  width: 94%;
+}
+
+.bar-95 .growing-bar {
+  width: 95%;
+}
+
+.bar-96 .growing-bar {
+  width: 96%;
+}
+
+.bar-97 .growing-bar {
+  width: 97%;
+}
+
+.bar-98 .growing-bar {
+  width: 98%;
+}
+
+.bar-99 .growing-bar {
+  width: 99%;
+}
+
+.bar-100 .growing-bar, input[id='pos-3']:checked ~ .chart .growing-bar, input[id='exercise-4']:checked ~ .chart.grid .exercise .bar:nth-child(3) .growing-bar {
+  width: 100%;
+}
+
+/*
+END // CHART'S RULES
+*
+*
+*/
+.chart.grid {
+  display: flex;
+  flex-direction: row;
+}
+.chart.grid .exercise {
+  flex: 0 0 100%;
+  display: flex;
+}
+.chart.grid .exercise .bar {
+  flex: 1;
+  margin: 0 .5em;
+}
+.chart.grid .exercise .bar:nth-child(2) {
+  z-index: 8;
+  flex: 1 0 40%;
+}
+.chart.grid .exercise .bar:first-child {
+  z-index: 10;
+  margin-left: 0;
+}
+.chart.grid .exercise .bar:last-child {
+  margin-right: 0;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  padding-bottom: 2em;
+  border-bottom: 1px dotted rgba(68, 68, 68, 0.4);
+}
+
+label {
+  box-sizing: border-box;
+  padding: 1em;
+  margin: 0 .2em;
+  cursor: pointer;
+  transition: all .15s ease-in-out;
+  color: #0a4069;
+  border: 1px solid rgba(254, 254, 254, 0.6);
+  border-radius: 0;
+  flex: 1;
+}
+label:first-child {
+  margin-left: 0;
+  border-radius: .2em 0 0 .2em;
+}
+label:last-child {
+  margin-right: 0;
+  border-radius: 0 .2em .2em 0;
+}
+
+input[id='exercise-1']:checked ~ .actions label[for='exercise-1'],
+input[id='exercise-2']:checked ~ .actions label[for='exercise-2'],
+input[id='exercise-3']:checked ~ .actions label[for='exercise-3'],
+input[id='exercise-4']:checked ~ .actions label[for='exercise-4'],
+input[id='pos-0']:checked ~ .actions label[for='pos-0'],
+input[id='pos-1']:checked ~ .actions label[for='pos-1'],
+input[id='pos-2']:checked ~ .actions label[for='pos-2'],
+input[id='pos-3']:checked ~ .actions label[for='pos-3'],
+input[id='red']:checked ~ .actions label[for='red'],
+input[id='cyan']:checked ~ .actions label[for='cyan'],
+input[id='lime']:checked ~ .actions label[for='lime'] {
+  color: #e72828;
+  border: 1px solid #031523;
+  background-color: #f9fbfc;
+}
+
+input[id='exercise-2']:checked ~ .chart.grid .exercise .bar:nth-child(1) {
+  flex: 1 0 0%;
+}
+input[id='exercise-2']:checked ~ .chart.grid .exercise .bar:nth-child(2) {
+  flex: 1;
+}
+input[id='exercise-2']:checked ~ .chart.grid .exercise .bar:nth-child(3) {
+  flex: 1 0 30%;
+}
+
+input[id='exercise-3']:checked ~ .chart.grid .exercise .bar:nth-child(1), input[id='exercise-3']:checked ~ .chart.grid .exercise .bar:nth-child(2), input[id='exercise-3']:checked ~ .chart.grid .exercise .bar:nth-child(3) {
+  flex: 1;
+}
+
+input[id='exercise-4']:checked ~ .chart.grid .exercise .bar:nth-child(1), input[id='exercise-4']:checked ~ .chart.grid .exercise .bar:nth-child(2) {
+  flex: 1 0 30%;
+}
+input[id='exercise-4']:checked ~ .chart.grid .exercise .bar:nth-child(3) {
+  flex: 1;
+}

@@ -1,0 +1,171 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --filament-saturation: 0;
+  --filament-lightness: 40;
+  --fitting-lightness: 30;
+  --chord-lightness: 50;
+  --bg-lightness: 5;
+  --glass-lightness: 30;
+  --glass-saturation: 0;
+  --light-alpha: 0;
+  --ceiling: 50;
+  --bulb-hue: 60;
+}
+body {
+  background: hsl(215, 100%, calc(var(--bg-lightness) * 1%));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+svg {
+  width: 90vmin;
+  transform: translate(0, -30%);
+}
+.wrapper {
+  position: relative;
+}
+.wrapper:after {
+  content: "";
+  width: 90vmin;
+  position: absolute;
+  bottom: 130%;
+  left: 0%;
+  border-bottom: 4px solid hsl(0, 0%, calc(var(--ceiling) * 1%));
+  transform: translate(0, 2px);
+}
+.light-bulb {
+  display: block;
+}
+.light-bulb__chord {
+  stroke: hsl(0, 0%, calc(var(--chord-lightness) * 1%));
+}
+.light-bulb__glass {
+  fill: hsla(var(--bulb-hue), 100%, calc(var(--glass-lightness) * 1%), var(--light-alpha));
+  stroke: hsla(var(--bulb-hue), calc(var(--glass-saturation) * 1%), calc(var(--glass-lightness) * 1%), 1);
+}
+.light-bulb__filament {
+  fill: none;
+  stroke: hsl(60, calc(var(--filament-saturation) * 1%), calc(var(--filament-lightness) * 1%));
+}
+.light-bulb__fitting {
+  fill: hsl(0, 0%, calc(var(--fitting-lightness) * 1%));
+}
+.light-bulb__fitting-shine {
+  fill: hsl(0, 0%, calc((var(--fitting-lightness) + 20) * 1%));
+}
+.light-bulb__bloom {
+  fill: none;
+  stroke: hsl(var(--bulb-hue), 100%, 50%);
+  stroke-width: 2;
+  opacity: 0;
+}
+[type='checkbox'] {
+  position: fixed;
+  bottom: 1rem;
+  opacity: 0.1;
+}
+[type='checkbox']:nth-of-type(1) {
+  right: 1rem;
+}
+[type='checkbox']:nth-of-type(1):checked ~ .wrapper svg .light-bulb:nth-of-type(odd) {
+  --bulb-hue: 90;
+}
+[type='checkbox']:nth-of-type(1):checked ~ .wrapper svg .light-bulb:nth-of-type(even) {
+  --bulb-hue: 0;
+}
+[type='checkbox']:nth-of-type(2) {
+  right: 2rem;
+}
+[type='checkbox']:nth-of-type(2):checked ~ .wrapper svg .light-bulb--1 {
+  --bulb-hue: 0;
+}
+[type='checkbox']:nth-of-type(2):checked ~ .wrapper svg .light-bulb--2 {
+  --bulb-hue: 30;
+}
+[type='checkbox']:nth-of-type(2):checked ~ .wrapper svg .light-bulb--3 {
+  --bulb-hue: 60;
+}
+[type='checkbox']:nth-of-type(2):checked ~ .wrapper svg .light-bulb--4 {
+  --bulb-hue: 90;
+}
+[type='checkbox']:nth-of-type(2):checked ~ .wrapper svg .light-bulb--5 {
+  --bulb-hue: 200;
+}
+[type='checkbox']:nth-of-type(2):checked ~ .wrapper svg .light-bulb--6 {
+  --bulb-hue: 270;
+}
+[type='checkbox']:nth-of-type(3) {
+  right: 3rem;
+}
+[type='checkbox']:nth-of-type(3):checked ~ .wrapper svg .light-bulb--1 {
+  --bulb-hue: 60;
+}
+[type='checkbox']:nth-of-type(3):checked ~ .wrapper svg .light-bulb--2 {
+  --bulb-hue: 120;
+}
+[type='checkbox']:nth-of-type(3):checked ~ .wrapper svg .light-bulb--3 {
+  --bulb-hue: 180;
+}
+[type='checkbox']:nth-of-type(3):checked ~ .wrapper svg .light-bulb--4 {
+  --bulb-hue: 240;
+}
+[type='checkbox']:nth-of-type(3):checked ~ .wrapper svg .light-bulb--5 {
+  --bulb-hue: 300;
+}
+[type='checkbox']:nth-of-type(3):checked ~ .wrapper svg .light-bulb--6 {
+  --bulb-hue: 360;
+}
+[type='checkbox']:nth-of-type(4) {
+  right: 4rem;
+}
+[type='checkbox']:nth-of-type(4):checked ~ .wrapper svg .light-bulb--1 {
+  --bulb-hue: 10;
+}
+[type='checkbox']:nth-of-type(4):checked ~ .wrapper svg .light-bulb--2 {
+  --bulb-hue: 20;
+}
+[type='checkbox']:nth-of-type(4):checked ~ .wrapper svg .light-bulb--3 {
+  --bulb-hue: 30;
+}
+[type='checkbox']:nth-of-type(4):checked ~ .wrapper svg .light-bulb--4 {
+  --bulb-hue: 40;
+}
+[type='checkbox']:nth-of-type(4):checked ~ .wrapper svg .light-bulb--5 {
+  --bulb-hue: 50;
+}
+[type='checkbox']:nth-of-type(4):checked ~ .wrapper svg .light-bulb--6 {
+  --bulb-hue: 60;
+}
+.banner-container {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+.hue-banner {
+  color: hsl(var(--hue, 0), 100%, 50%);
+  border-color: hsl(var(--hue, 0), 100%, 50%);
+  border-style: solid;
+  border-width: 4px;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  -webkit-animation: fadeToBlack 0.5s 1s both;
+          animation: fadeToBlack 0.5s 1s both;
+}
+@-webkit-keyframes fadeToBlack {
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeToBlack {
+  to {
+    opacity: 0;
+  }
+}

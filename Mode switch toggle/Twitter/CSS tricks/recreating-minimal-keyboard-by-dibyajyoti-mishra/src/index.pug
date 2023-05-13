@@ -1,0 +1,43 @@
+.keyboard
+	.row
+		.key.orange(data-code="Escape" data-macro="orange")
+		//- - for(var i = 0; i < 12; i++)
+		each val in '1234567890'.split('').map(n => 'Digit' + n).concat('Minus', 'Equal')
+			.key(data-code=val)
+		.key.size-4.grey.stretch(data-code="Backspace")
+		.key.red(data-macro="red")
+	.row
+		.key.size-2.grey.stretch(data-code="Tab")
+		//- - for(var i = 0; i < 12; i++)
+		each val in 'QWERTYUIOP'.split('').map(n => 'Key' + n).concat('BracketLeft', 'BracketRight')
+			.key(data-code=val)
+		.key.size-2.grey.stretch(data-code="Backslash")
+		.key.yellow(data-macro="yellow")
+	.row
+		.key.size-3.grey.stretch(data-code="CapsLock")
+		//- - for(var i = 0; i < 11; i++)
+		each val in 'ASDFGHJKL'.split('').map(n => 'Key' + n).concat('Semicolon', 'Quote')
+			.key(data-code=val)
+		.key.size-5.green.stretch(data-code="Enter" data-macro="green:Enter")
+		.key.green(data-macro="green")
+	.row
+		.key.size-5.yellow.stretch(data-code="ShiftLeft" data-macro="yellow:ShiftLeft")
+		//- - for(var i = 0; i < 10; i++)
+		each val in 'ZXCVBNM'.split('').map(n => 'Key' + n).concat('Comma', 'Period', 'Slash')
+			.key(data-code=val)
+		.key.size-3.yellow.stretch(data-code="ShiftRight" data-macro="yellow:ShiftRight")
+		.key(data-code="ArrowUp")
+		.key.blue(data-macro="blue")
+	.row
+		.key.size-6.red(data-code="ControlLeft" data-macro="red:ControlLeft")
+		.key.size-6.purple(data-code="MetaLeft" data-macro="purple:MetaLeft")
+		.key.size-6.blue(data-code="AltLeft" data-macro="blue:AltLeft")
+		.key.size-7.empty(data-code="Space" data-macro="default:Space")
+		.key.size-2.blue.stretch(data-code="AltRight" data-macro="blue:AltRight")
+		.key.size-2.purple.stretch(data-code="ContextMenu" data-macro="purple:ContextMenu")
+		.key(data-code="ArrowLeft")
+		.key(data-code="ArrowDown")
+		.key(data-code="ArrowRight")
+#footer
+	a(href="https://dribbble.com/shots/14735602-Minimal-keyboard" target="_blank")
+		#dribbble

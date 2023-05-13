@@ -1,0 +1,207 @@
+:root {
+  --gap: 15px;
+  --key-width: 50px;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  background-color: #0a0a0a;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+.keyboard {
+  --rot-x: 20deg;
+  --rot-y: 0deg;
+  display: inline-flex;
+  flex-direction: column;
+  padding: var(--gap);
+  border-radius: 17.5px;
+  transform-style: preserve-3d;
+  perspective: 1200px;
+  transform: perspective(1200px) rotateX(var(--rot-x)) rotateY(var(--rot-y));
+  transition: 100ms transform;
+}
+
+.row {
+  display: flex;
+  transform-style: preserve-3d;
+}
+.row + .row {
+  margin-top: var(--gap);
+}
+
+.keyboard,
+.key {
+  background: #141414;
+  border: 2px solid rgba(64, 64, 64, 0.2);
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.01), -2px -2px 6px rgba(255, 255, 255, 0.03), 2px 2px 5px rgba(0, 0, 0, 0.3), 5px 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.key {
+  --width: var(--key-width);
+  --color: hsl(0, 0%, 85%);
+  --size: 1;
+  --size-2: 1.654545;
+  --size-3: 1.981818;
+  --size-4: 2.290909;
+  --size-5: 2.618181;
+  --size-6: 1.327272;
+  --size-7: 7.8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(var(--width) * var(--size));
+  height: var(--width);
+  border-radius: 7.5px;
+  flex-shrink: 0;
+  box-sizing: border-box;
+  transform: translate3D(0, 0, 30px);
+  transition: 100ms;
+  cursor: pointer;
+}
+.key:hover {
+  transform: translate3D(0, 0, 35px);
+}
+.key:active, .key[data-selected]:not([data-selected=false]) {
+  transform: translate3D(0, 0, 25px);
+  border-color: var(--color);
+  box-shadow: -5px -5px 10px rgba(255, 255, 255, 0.01), -2px -2px 6px rgba(255, 255, 255, 0.03), 2px 2px 5px rgba(0, 0, 0, 0.3), 5px 5px 10px rgba(0, 0, 0, 0.3), 0px 2px 8px var(--color), 0px 5px 20px var(--color);
+}
+.key + .key {
+  margin-left: var(--gap);
+}
+.key:before {
+  display: block;
+  content: "";
+  width: 15px;
+  height: 15px;
+  border-radius: 7.5px;
+  background-color: var(--color);
+}
+.key.stretch {
+  padding: 0 25px;
+}
+.key.stretch:before {
+  width: 100%;
+}
+.key.empty:before {
+  display: none;
+}
+.key.size-2 {
+  --size: var(--size-2);
+}
+.key.size-3 {
+  --size: var(--size-3);
+}
+.key.size-4 {
+  --size: var(--size-4);
+}
+.key.size-5 {
+  --size: var(--size-5);
+}
+.key.size-6 {
+  --size: var(--size-6);
+}
+.key.size-7 {
+  --size: var(--size-7);
+}
+.key.grey {
+  --color: hsl( 0, 0%, 50%);
+}
+.key.red {
+  --color: hsl( 0, 80%, 60%);
+}
+.key.orange {
+  --color: hsl( 25, 80%, 60%);
+}
+.key.yellow {
+  --color: hsl( 50, 80%, 60%);
+}
+.key.green {
+  --color: hsl(150, 80%, 60%);
+}
+.key.blue {
+  --color: hsl(210, 80%, 60%);
+}
+.key.purple {
+  --color: hsl(270, 80%, 60%);
+}
+.key[data-color=grey] {
+  --color: hsl( 0, 0%, 50%);
+}
+.key[data-color=red] {
+  --color: hsl( 0, 80%, 60%);
+}
+.key[data-color=orange] {
+  --color: hsl( 25, 80%, 60%);
+}
+.key[data-color=yellow] {
+  --color: hsl( 50, 80%, 60%);
+}
+.key[data-color=green] {
+  --color: hsl(150, 80%, 60%);
+}
+.key[data-color=blue] {
+  --color: hsl(210, 80%, 60%);
+}
+.key[data-color=purple] {
+  --color: hsl(270, 80%, 60%);
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+#footer {
+  height: 12vh;
+  font-size: 1vh;
+}
+#footer #dribbble {
+  border-radius: 2vh;
+  position: absolute;
+  bottom: 4vh;
+  right: 4vh;
+  transition: 300ms cubic-bezier(0.7, 0, 0.3, 1);
+  padding-left: 1.5vh;
+}
+#footer #dribbble:before, #footer #dribbble:after {
+  vertical-align: middle;
+  transition: inherit;
+}
+#footer #dribbble:before {
+  display: inline;
+  content: "View original Dribbble";
+  font-size: 2vh;
+  opacity: 0;
+  transform: translate3D(-200px, 0, 0);
+}
+#footer #dribbble:after {
+  content: "";
+  display: inline-block;
+  width: 4vh;
+  height: 4vh;
+  margin-left: 1vh;
+  background-image: url(https://alca.tv/static/u/82fde61b-28ef-4f17-976e-8f1abb5a1165.png);
+  background-size: contain;
+  background-position: center;
+}
+#footer #dribbble.hover, #footer #dribbble:hover {
+  background: #e94e89;
+}
+#footer #dribbble.hover:before, #footer #dribbble:hover:before {
+  opacity: 1;
+  transform: translate3D(0, 0, 0);
+  transition-delay: 50ms;
+}
+#footer #dribbble.hover:after, #footer #dribbble:hover:after {
+  filter: saturate(0%) contrast(200%) brightness(200%) invert(100%);
+}
