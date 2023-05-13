@@ -1,1 +1,0 @@
-// Reference: https://redstapler.co/pure-css-minimal-dark-mode-toggle-button/

@@ -1,1 +1,0 @@
-// your browser should support CSS Houdini to see the animation
